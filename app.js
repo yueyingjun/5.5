@@ -8,8 +8,6 @@ var bodyParser = require('body-parser');
 var index=require("./routes/index.js");
 var admin=require("./routes/admin.js");
 
-
-
 var app = express();
 
 app.use("/",index);

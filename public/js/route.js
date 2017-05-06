@@ -1,3 +1,15 @@
+/*
+*   link
+*   script
+*
+*   a
+*
+*   img src
+*
+*   ajax({
+*   url:"/tpl/main.html"})
+*
+* */
 angular.module("Route",["ngRoute"])
 .config(["$routeProvider",function(route){
         route.when("/",{
