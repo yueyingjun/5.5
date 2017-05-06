@@ -27,6 +27,9 @@ angular.module("Route",["ngRoute"])
         }).when("/todoinfo/:id",{
             templateUrl:"/tpl/todoinfo.html",
             controller:"todoinfo"
+        }).when("/list",{
+            templateUrl:"/tpl/list.html",
+            controller:"list"
         })
 
 }])

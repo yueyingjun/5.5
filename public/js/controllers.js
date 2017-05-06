@@ -1,5 +1,5 @@
 angular.module("Controllers",[])
-.controller("main",["$scope",function($scope){
+.controller("main",["$scope","$http",function($scope,$http){
 
     var swiper = new Swiper('.swiper-container',{
         pagination : '.swiper-pagination',
@@ -9,6 +9,14 @@ angular.module("Controllers",[])
 
         }
     });
+
+    $http({url:"/indexData"}).then(function(data){
+       $scope.data=data.data;
+
+       console.log($scope.data);
+    })
+
+
 
 }]).controller("phone",["$scope",function($scope){
 
@@ -50,4 +58,12 @@ angular.module("Controllers",[])
 
 }]).controller("todoinfo",["$scope",function($scope){
 
+}]).controller("list",["$scope","$location","$http",function($scope,$location,$http){
+
+    $http({url:"/getCon",params:{url:Object.keys($location.$$search)[0]},responseType:"text"}).then(function(e){
+
+        $scope.data=e.data;
+         console.log($scope.data);
+        document.querySelector(".con").innerHTML=($scope.data);
+    })
 }])

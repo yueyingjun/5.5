@@ -8,6 +8,7 @@ module.exports.readCategory=function(url,callback){
     var categoryArr=[];
     nodegrass.get(url,function(body,info,head){
         var $=cheerio.load(body);
+
         var categorys=$("#smnav").find("li a");
         categorys.each(function(index,obj){
             var newobj={};
@@ -16,7 +17,7 @@ module.exports.readCategory=function(url,callback){
                 return;
             }
             newobj.catname=catname;
-            newobj.url=obj.attribs.href;
+            newobj.caturl=obj.attribs.href;
             newobj.catid=index+1;
             categoryArr.push(newobj);
         })
@@ -28,6 +29,7 @@ module.exports.readCategory=function(url,callback){
 module.exports.readList=function(url,callback){
     var listArr=[];
     nodegrass.get(url,function(body,info,head){
+
         var $=cheerio.load(body);
         var lists=$("#listZone .Q-tpList");
 
@@ -38,7 +40,7 @@ module.exports.readList=function(url,callback){
           newobj.url=$(obj).find("h3 a")[0].attribs.href;
           var info=unescape($(obj).find("p").html().replace(/&#x/g,"%u").replace(/;/g,""));
           newobj.info=info;
-          newobj.imgurl=$(obj).find(".pic img")[0].attribs.src;
+          newobj.img=$(obj).find(".pic img")[0].attribs.src;
 
           listArr.push(newobj);
         })
