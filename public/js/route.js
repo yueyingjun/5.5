@@ -11,7 +11,15 @@
 *
 * */
 angular.module("Route",["ngRoute"])
-.config(["$routeProvider",function(route){
+.config(["$routeProvider","$httpProvider",function(route,$httpProvider){
+    /*
+    if (!$httpProvider.defaults.headers.get) {
+        $httpProvider.defaults.headers.get = {};
+    }
+    $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
+    $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
+    $httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
+    */
         route.when("/",{
             templateUrl:"/tpl/main.html",
             controller:"main"

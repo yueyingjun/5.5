@@ -60,10 +60,11 @@ angular.module("Controllers",[])
 
 }]).controller("list",["$scope","$location","$http",function($scope,$location,$http){
 
-    $http({url:"/getCon",params:{url:Object.keys($location.$$search)[0]},responseType:"text"}).then(function(e){
 
+
+
+    $http({url:"/getCon",params:{url:Object.keys($location.$$search)[0]},responseType:"text"}).then(function(e){
         $scope.data=e.data;
-         console.log($scope.data);
         document.querySelector(".con").innerHTML=($scope.data);
     })
 }])

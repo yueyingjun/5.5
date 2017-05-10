@@ -2,7 +2,7 @@ var nodegrass=require("nodegrass")
 var async=require("async");
 var cheerio=require("cheerio");
 
-//读栏目的
+//读栏目
 
 module.exports.readCategory=function(url,callback){
     var categoryArr=[];

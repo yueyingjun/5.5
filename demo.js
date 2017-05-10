@@ -1,9 +1,7 @@
-var async=require("async");
-var arr=[1,2,3,4];
 
-async.eachSeries(arr,function(item,callback){
-     setTimeout(function(){
-         console.log(item);
-         callback();
-     },1000)
-})
+var CronJob = require('cron').CronJob;
+var client=require("./client");
+new CronJob('* * */2 * * *', function() {
+  client();
+}, null, true, 'America/Los_Angeles');
+
