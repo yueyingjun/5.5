@@ -1,4 +1,4 @@
-angular.module("Controllers",[])
+angular.module("Controllers",["services"])
 .controller("main",["$scope","$http",function($scope,$http){
 
     var swiper = new Swiper('.swiper-container',{
@@ -18,7 +18,14 @@ angular.module("Controllers",[])
 
 
 
-}]).controller("phone",["$scope",function($scope){
+}]).controller("phone",["$scope","$http",function($scope,$http){
+
+    $http({url:"/phone/select"}).then(function(data){
+        $scope.data=data.data;
+
+    })
+
+
 
 }]).controller("index",["$scope",function($scope){
 
@@ -27,14 +34,21 @@ angular.module("Controllers",[])
         $scope.active=name;
     }
 
-}]).controller("todo",["$scope",function($scope){
+}]).controller("todo",["$scope","Todo",function($scope,Todo){
+
+    $scope.data=Todo;
+
+    $scope.del=function(index){
+         $scope.data.splice(index,1);
+         localStorage.todo=JSON.stringify($scope.data);
+    }
      var list=$(".mui-navigate-right");
      var currentLeft=0;
     touch.on(".mui-navigate-right","dragstart",function(e){
         currentLeft= parseInt($(this).css("left"))?parseInt($(this).css("left")):0;
     })
 
-     touch.on(".mui-navigate-right","drag",function(e){
+     touch.on("body","drag",".mui-navigate-right",function(e){
 
             if(e.direction=="left") {
                 var left=currentLeft+e.x;
@@ -54,9 +68,39 @@ angular.module("Controllers",[])
                 $(this).css("left",left);
             }
      })
-}]).controller("todocon",["$scope",function($scope){
+}]).controller("todocon",["$scope","Todo",function($scope,Todo){
 
-}]).controller("todoinfo",["$scope",function($scope){
+      $scope.data=Todo;
+
+      $scope.con="";
+
+      $scope.add=function(){
+            $scope.data.push($scope.con);
+            $scope.con="";
+            localStorage.todo=JSON.stringify($scope.data);
+      }
+}]).controller("todoinfo",["$scope","$routeParams","Todo",function($scope,$routeParams,Todo){
+    let id=$routeParams.id;
+    $scope.data=Todo;
+
+    $scope.currentData=$scope.data[id];
+    $scope.$watch("currentData",function(){
+        $scope.data[id]=$scope.currentData;
+    })
+
+    $scope.edit=function(){
+        localStorage.todo=JSON.stringify($scope.data);
+
+    }
+
+
+
+
+
+
+
+
+
 
 }]).controller("list",["$scope","$location","$http",function($scope,$location,$http){
 
