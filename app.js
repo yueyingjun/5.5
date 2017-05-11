@@ -9,6 +9,7 @@ var index=require("./routes/index.js");
 var admin=require("./routes/admin.js");
 var login=require("./routes/login.js");
 var phone=require("./routes/phone.js");
+var log=require("./routes/log.js");
 var app = express();
 
 
@@ -38,6 +39,7 @@ app.use("/login",login);
 app.use("/",index);
 app.use("/admin",admin);
 app.use("/phone",phone);
+app.use("/log",log);
 
 app.listen(8888,function(){
   console.log("start")

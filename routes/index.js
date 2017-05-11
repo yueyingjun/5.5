@@ -6,12 +6,16 @@ var router=express.Router();
 
 function  middle (req,res,next){
 
+    /*
     if(!req.session.user){
         res.redirect("/login");
     }else {
 
         next();
     }
+    */
+
+    next();
 }
 
 
@@ -49,6 +53,11 @@ router.get("/getCon",middle,function(req,res){
         res.send(body);
     },"gbk");
 
+})
+
+router.get("/userInfo",middle,function(req,res){
+      console.log(req.session.user)
+      res.send(JSON.stringify(req.session.user));
 })
 
 module.exports=router;

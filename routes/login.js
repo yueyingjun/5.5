@@ -24,6 +24,7 @@ router.get("/checkLogin",function(req,res){
                     if(rows.upass==upass){
                         flag=false;
                       var user={
+                          uid:rows["uid"],
                           uname:uname,
                           login:"yes"
                       }

@@ -7,12 +7,16 @@ var router=express.Router();
 
 
 function middle(req,res,next){
+    /*
     if(!req.session.admin){
         res.redirect("/admin/login");
     }else {
 
         next();
     }
+    */
+
+    next();
 }
 
 router.get("/login",function(req,res){

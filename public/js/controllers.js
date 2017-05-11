@@ -116,11 +116,44 @@ angular.module("Controllers",["services"])
 
 }]).controller("send",["$scope","$location","$http",function($scope,$location,$http){
 
+           $http({url:"/log/selectSend"}).then(function(data){
+            $scope.data=data.data;
+           })
+
+
 
 }]).controller("jieshou",["$scope","$location","$http",function($scope,$location,$http){
 
 
-}]).controller("write",["$scope","$location","$http",function($scope,$location,$http){
+}]).controller("write",["$scope","$http","userInfo",function($scope,$http,userInfo){
+
+    $http({url:"/log/selectUser"}).then(function(data){
+        $scope.user=data.data;
+    })
+
+    /*
+    userInfo.then(function(data){
+        $scope.uid=data.data.uid;
+
+    })
+
+    */
+
+      $scope.jieshouid="";
+      $scope.title="";
+      $scope.con="";
+
+    $scope.send=function(){
+
+        $http({url:"/log/addLog",params:{jieshouid:$scope.jieshouid,title:$scope.title,con:$scope.con}}).then(function (data) {
+            if(data.data>0){
+                $scope.jieshouid="";
+                $scope.title="";
+                $scope.con="";
+            }
+        })
+    }
+
 
 
 }])
