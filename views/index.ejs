@@ -15,6 +15,7 @@
             location.href="/welcome"
         }
     </script>
+
     <script src="/js/angular.min.js"></script>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/touch.js"></script>
@@ -25,6 +26,15 @@
     <script src="/js/route.js"></script>
     <script src="/js/services.js"></script>
     <script src="/js/app.js"></script>
+
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=GidEbmZm93WkcjnCCVzy8U6h"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/3.5.4/echarts.js"></script>
+
+    <script>
+
+    </script>
 
 
 </head>
@@ -54,7 +64,7 @@
         <span class="mui-icon mui-icon-gear"></span>
         <span class="mui-tab-label">发送日志</span>
     </a>
-    <a class="mui-tab-item" ng-class="{'mui-active':active=='five'}"   ng-click="change('five')">
+    <a class="mui-tab-item" ng-class="{'mui-active':active=='five'}"   ng-click="change('five')" href="#!/setting" >
         <span class="mui-icon mui-icon-gear"></span>
         <span class="mui-tab-label">设置</span>
     </a>

@@ -23,6 +23,7 @@ router.get("/addLog",function(req,res){
 router.get("/selectSend",function(req,res){
     var uid=req.session.user.uid;
     mysql.query("select * from logs where sendid="+uid,function(error,result){
+
        res.send(JSON.stringify(result));
     })
 })
@@ -52,8 +53,6 @@ router.get("/logshow",function(req,res){
     })
 
 })
-
-
 
 
 module.exports=router;

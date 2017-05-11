@@ -12,14 +12,14 @@
 * */
 angular.module("Route",["ngRoute"])
 .config(["$routeProvider","$httpProvider",function(route,$httpProvider){
-    /*
+
     if (!$httpProvider.defaults.headers.get) {
         $httpProvider.defaults.headers.get = {};
     }
     $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
     $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
     $httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
-    */
+
         route.when("/",{
             templateUrl:"/tpl/main.html",
             controller:"main"
@@ -53,6 +53,19 @@ angular.module("Route",["ngRoute"])
         }).when("/logshow/:logid",{
             templateUrl:"/tpl/logshow.html",
             controller:"logshow"
+        }).when("/setting",{
+            templateUrl:"/tpl/setting.html",
+            controller:"setting"
+        }).when("/reset",{
+            templateUrl:"/tpl/reset.html",
+            controller:"reset"
+        }).when("/dataview",{
+            templateUrl:"/tpl/dataview.html",
+            controller:"dataview"
         })
+
+
+
+
 
 }])

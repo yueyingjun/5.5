@@ -1,3 +1,4 @@
+
 angular.module("Controllers",["services"])
 .controller("main",["$scope","$http",function($scope,$http){
 
@@ -8,13 +9,26 @@ angular.module("Controllers",["services"])
         onTransitionEnd:function(){
 
         }
+
     });
 
     $http({url:"/indexData"}).then(function(data){
        $scope.data=data.data;
 
-       console.log($scope.data);
     })
+
+    function myFun(result){
+        var cityName = result.name;
+        $scope.city=cityName;
+        $scope.$apply();
+    }
+    var myCity = new BMap.LocalCity();
+    myCity.get(myFun);
+
+
+
+
+
 
 
 
@@ -93,26 +107,13 @@ angular.module("Controllers",["services"])
 
     }
 
-
-
-
-
-
-
-
-
-
 }]).controller("list",["$scope","$location","$http",function($scope,$location,$http){
-
-
-
 
     $http({url:"/getCon",params:{url:Object.keys($location.$$search)[0]},responseType:"text"}).then(function(e){
         $scope.data=e.data;
         document.querySelector(".con").innerHTML=($scope.data);
     })
 }]).controller("log",["$scope","$location","$http",function($scope,$location,$http){
-
 
 }]).controller("send",["$scope","$location","$http",function($scope,$location,$http){
 
@@ -187,15 +188,108 @@ angular.module("Controllers",["services"])
             }
         })
     }
-
-
-
 }]).controller("logshow",["$scope","$routeParams","$http",function($scope,$routeParams,$http){
    var id=$routeParams.logid;
-
-
-
    $http({url:"/log/logshow",params:{id:id}}).then(function(data){
        $scope.data=data.data;
    })
+}]).controller("setting",["$scope",function($scope){
+
+
+}]).controller("reset",["$scope","$http",function($scope,$http){
+
+    $scope.isshow=false;
+    $scope.pass1="";
+    $scope.pass2="";
+    $scope.edit=function(){
+        $http({url:"/editPass",params:{
+            pass1:$scope.pass1,
+            pass2:$scope.pass2
+        }}).then(function(e){
+            if(e.data=="no"){
+                $scope.pass1="";
+                $scope.pass2="";
+                $scope.isshow=true;
+
+                setTimeout(function(){
+                    $scope.isshow=false;
+                    $scope.$apply();
+                },1000)
+            }else if(e.data=="ok"){
+                location.href="/login";
+            }
+        })
+    }
+
+}]).controller("dataview",["$scope","$http",function($scope,$http){
+
+
+    $http({url:"/dataview/cat"}).then(function(data){
+
+
+       var xAxis=data.data.map(function(a,b,c){
+            return a.catname;
+       })
+
+        var catids=data.data.map(function(a,b,c){
+            return a.catid;
+        })
+
+
+
+
+        $http({url:"/dataview/con"}).then(function(data1){
+
+
+            var series=[];
+            catids.forEach(function(catid,index){
+                series.push(data1.data.filter(function(a,b,c){
+                    return a.catid==catid;
+                }).length)
+            })
+
+
+
+
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('main'));
+
+            // 指定图表的配置项和数据
+            var option = {
+                title: {
+                    text: '新闻统计'
+                },
+                tooltip: {},
+                legend: {
+                    data:['销量']
+                },
+                xAxis: {
+                    data: xAxis
+                },
+                yAxis: {},
+                series: [{
+                    name: '销量',
+                    type: 'scatter',
+                    data: series
+                }]
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+
+
+        })
+
+
+
+    })
+
+
+
+
+
+
+
+
+
 }])
