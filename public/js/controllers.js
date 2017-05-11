@@ -125,6 +125,40 @@ angular.module("Controllers",["services"])
 }]).controller("jieshou",["$scope","$location","$http",function($scope,$location,$http){
 
 
+    $http({url:"/log/selectdu"}).then(function(data){
+            $scope.du=data.data
+    })
+
+    $http({url:"/log/selectun"}).then(function(data){
+            $scope.un=data.data;
+    })
+
+    $scope.allFun=function(){
+        $http({url:"/log/selectdu"}).then(function(data){
+            $scope.du=data.data
+        })
+
+        $http({url:"/log/selectun"}).then(function(data){
+            $scope.un=data.data;
+        })
+    }
+
+    $scope.duFun=function(){
+        $http({url:"/log/selectdu"}).then(function(data){
+            $scope.du=data.data;
+            $scope.un=[];
+        })
+    }
+
+    $scope.unFun=function(){
+        $http({url:"/log/selectun"}).then(function(data){
+            $scope.un=data.data;
+            $scope.du=[];
+        })
+    }
+
+
+
 }]).controller("write",["$scope","$http","userInfo",function($scope,$http,userInfo){
 
     $http({url:"/log/selectUser"}).then(function(data){
@@ -156,4 +190,12 @@ angular.module("Controllers",["services"])
 
 
 
+}]).controller("logshow",["$scope","$routeParams","$http",function($scope,$routeParams,$http){
+   var id=$routeParams.logid;
+
+
+
+   $http({url:"/log/logshow",params:{id:id}}).then(function(data){
+       $scope.data=data.data;
+   })
 }])

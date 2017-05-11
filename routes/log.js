@@ -27,6 +27,33 @@ router.get("/selectSend",function(req,res){
     })
 })
 
+router.get("/selectdu",function(req,res){
+    var uid=req.session.user.uid;
+    mysql.query("select * from logs where jieshouid="+uid+" and state=2",function(error,result){
+        res.send(JSON.stringify(result));
+    })
+})
+
+router.get("/selectun",function(req,res){
+    var uid=req.session.user.uid;
+    mysql.query("select * from logs where jieshouid="+uid+" and state=1",function(error,result){
+        res.send(JSON.stringify(result));
+    })
+
+})
+
+router.get("/logshow",function(req,res){
+    var id=req.query.id;
+    mysql.query("select * from logs where id="+id,function(error,result){
+        mysql.query("update logs set state=2 where id="+id,function(){
+            res.send(JSON.stringify(result[0]));
+        })
+
+    })
+
+})
+
+
 
 
 module.exports=router;

@@ -50,6 +50,9 @@ angular.module("Route",["ngRoute"])
         }).when("/write",{
             templateUrl:"/tpl/write.html",
             controller:"write"
+        }).when("/logshow/:logid",{
+            templateUrl:"/tpl/logshow.html",
+            controller:"logshow"
         })
 
 }])
