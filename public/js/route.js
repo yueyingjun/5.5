@@ -38,6 +38,18 @@ angular.module("Route",["ngRoute"])
         }).when("/list",{
             templateUrl:"/tpl/list.html",
             controller:"list"
+        }).when("/log",{
+            templateUrl:"/tpl/log.html",
+            controller:"log"
+        }).when("/send",{
+            templateUrl:"/tpl/send.html",
+            controller:"send"
+        }).when("/jieshou",{
+            templateUrl:"/tpl/jieshou.html",
+            controller:"jieshou"
+        }).when("/write",{
+            templateUrl:"/tpl/write.html",
+            controller:"write"
         })
 
 }])

@@ -111,4 +111,16 @@ angular.module("Controllers",["services"])
         $scope.data=e.data;
         document.querySelector(".con").innerHTML=($scope.data);
     })
+}]).controller("log",["$scope","$location","$http",function($scope,$location,$http){
+
+
+}]).controller("send",["$scope","$location","$http",function($scope,$location,$http){
+
+
+}]).controller("jieshou",["$scope","$location","$http",function($scope,$location,$http){
+
+
+}]).controller("write",["$scope","$location","$http",function($scope,$location,$http){
+
+
 }])

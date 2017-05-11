@@ -42,23 +42,21 @@
 
 <header class="mui-bar mui-bar-nav">
     <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="javascript:;" onclick="history.back()"></a>
-    <h1 class="mui-title">代办事项</h1>
-    <a class=" mui-icon mui-icon-compose mui-pull-right" href="#!/todocon"></a>
+    <h1 class="mui-title">日志</h1>
+
 </header>
 
 <div class="mui-content">
-<ul class="mui-table-view" ng-show="data.length>0">
-    <li class="mui-table-view-cell" ng-repeat="item in data">
-
-        <a href="#!/todoinfo/{{$index}}"class="mui-navigate-right">
-            {{item}}
-        </a>
-        <span class="mui-icon mui-icon-trash" ng-click="del($index)"></span>
-    </li>
-</ul>
-
-    <ul class="mui-table-view" style="text-align: center" ng-show="data.length==0" >
-        没有数据
+    <ul class="mui-table-view">
+        <li class="mui-table-view-cell">
+            <a class="mui-navigate-right" href="#!/send">发送日志</a>
+        </li>
+        <li class="mui-table-view-cell">
+            <a class="mui-navigate-right" href="#!/jieshou">接收的日志</a>
+        </li>
+        <li class="mui-table-view-cell">
+            <a class="mui-navigate-right" href="#!/write">写日志</a>
+        </li>
     </ul>
 
 
